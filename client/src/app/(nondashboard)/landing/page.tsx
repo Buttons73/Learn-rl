@@ -1,12 +1,119 @@
 "use client"
 
-// import { useCarousel } from '@/hooks/useCarousel'
-// import Image from 'next/image'
 import Link from "next/link"
 import { ArrowRight, BookOpen, Users, Code, Video, Zap, Globe, Clock } from "lucide-react"
+import { useState, useEffect } from "react"
+
+const SkeletonLoader = () => {
+  return (
+    <div className="flex flex-col min-h-screen animate-pulse">
+      {/* Hero section skeleton */}
+      <div className="relative w-full bg-gradient-to-b pt-16 pb-24 md:pt-24 md:pb-32">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-center">
+            <div className="flex flex-col gap-6">
+              <div className="h-16 md:h-20 lg:h-24 bg-gray-700 rounded-md w-4/5"></div>
+              <div className="space-y-3">
+                <div className="h-5 md:h-6 bg-gray-700 rounded w-full"></div>
+                <div className="h-5 md:h-6 bg-gray-700 rounded w-5/6"></div>
+                <div className="h-5 md:h-6 bg-gray-700 rounded w-4/6"></div>
+              </div>
+              <div className="mt-4">
+                <div className="h-12 bg-gray-700 rounded-md w-56"></div>
+              </div>
+            </div>
+            <div className="relative rounded-xl overflow-hidden shadow-xl h-[300px] md:h-[400px] bg-gray-700"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Features section skeleton */}
+      <div className="py-16">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="w-16 h-16 rounded-full bg-gray-700 mb-6"></div>
+            <div className="h-10 bg-gray-700 rounded-md w-3/4 max-w-md mb-6"></div>
+            <div className="h-5 md:h-6 bg-gray-700 rounded w-full max-w-2xl"></div>
+            <div className="h-5 md:h-6 bg-gray-700 rounded w-5/6 max-w-2xl mt-2"></div>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex flex-col items-center p-8 rounded-lg border border-gray-700 h-[250px]">
+                <div className="w-16 h-16 rounded-full bg-gray-700 mb-6"></div>
+                <div className="h-7 bg-gray-700 rounded-md w-3/4 mb-6"></div>
+                <div className="space-y-3 w-full">
+                  <div className="h-4 bg-gray-700 rounded w-full"></div>
+                  <div className="h-4 bg-gray-700 rounded w-5/6 mx-auto"></div>
+                  <div className="h-4 bg-gray-700 rounded w-4/6 mx-auto"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Demo section skeleton */}
+      <div className="py-16">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="w-16 h-16 rounded-full bg-gray-700 mb-6"></div>
+            <div className="h-10 bg-gray-700 rounded-md w-3/4 max-w-md mb-6"></div>
+            <div className="h-5 md:h-6 bg-gray-700 rounded w-full max-w-2xl"></div>
+            <div className="h-5 md:h-6 bg-gray-700 rounded w-5/6 max-w-2xl mt-2"></div>
+          </div>
+
+          <div className="relative mx-auto max-w-4xl aspect-video rounded-xl border-2 border-gray-700 bg-gray-800">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-24 h-24 bg-gray-700 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Featured courses skeleton */}
+      <div className="py-16">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="w-16 h-16 rounded-full bg-gray-700 mb-6"></div>
+            <div className="h-10 bg-gray-700 rounded-md w-3/4 max-w-md mb-6"></div>
+            <div className="h-5 md:h-6 bg-gray-700 rounded w-full max-w-2xl"></div>
+            <div className="h-5 md:h-6 bg-gray-700 rounded w-5/6 max-w-2xl mt-2"></div>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="rounded-lg border border-gray-700 p-2 bg-gray-800">
+                <div className="aspect-video w-full rounded-md bg-gray-700"></div>
+                <div className="p-4 space-y-3">
+                  <div className="h-6 bg-gray-700 rounded w-3/4"></div>
+                  <div className="h-4 bg-gray-700 rounded w-full"></div>
+                  <div className="h-4 bg-gray-700 rounded w-5/6"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const Landing = () => {
-  // const currrentImage = useCarousel({totalImages: 3})
+  const [isLoading, setIsLoading] = useState(true)
+  
+  useEffect(() => {
+    // Simulate content loading
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1500)
+    
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (isLoading) {
+    return <SkeletonLoader />
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -30,13 +137,6 @@ const Landing = () => {
               </div>
             </div>
             <div className="relative rounded-xl overflow-hidden shadow-xl h-[300px] md:h-[400px]">
-              {/* {["/hero1.jpg","/hero2.jpg","/hero3.jpg"].map((img, i) => (
-                <Image key={img} src={img || "/placeholder.svg"} alt="" fill priority={i === currrentImage} sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
-                className={`landing__hero-image ${
-                  i === currrentImage ? "landing__hero-image--active" : ""  
-                  }`} 
-                />
-              ))} */}
               <img src="/hero1.jpg" alt="hero-image" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -44,10 +144,10 @@ const Landing = () => {
       </div>
 
       {/* Live Pair Programming Section */}
-      <div className="py-16 ">
+      <div className="py-16">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center text-center mb-12">
-            <div className="inline-flex items-center justify-center p-2 mb-4 rounded-full ">
+            <div className="inline-flex items-center justify-center p-2 mb-4 rounded-full">
               <Users className="h-6 w-6 text-blue-400" />
             </div>
             <h2 className="text-3xl font-bold tracking-tight mb-4 text-white">Live Pair Programming</h2>
@@ -58,14 +158,14 @@ const Landing = () => {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="flex flex-col items-center p-6  rounded-lg border border-gray-700">
+            <div className="flex flex-col items-center p-6 rounded-lg border border-gray-700">
               <Code className="h-10 w-10 text-blue-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">Real-time Collaboration</h3>
               <p className="text-gray-400 text-center">
                 Code together in a shared environment with synchronized editing and instant feedback.
               </p>
             </div>
-            <div className="flex flex-col items-center p-6  rounded-lg border border-gray-700">
+            <div className="flex flex-col items-center p-6 rounded-lg border border-gray-700">
               <Zap className="h-10 w-10 text-blue-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">AI Assistance</h3>
               <p className="text-gray-400 text-center">
